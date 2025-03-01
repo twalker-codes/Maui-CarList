@@ -14,45 +14,55 @@ namespace CarListApp.Maui.ViewModels
 
         private async void CheckUserLoginDetails()
         {
+            try
+            {
+                // Retrieve token from internal storage
+                var token = await SecureStorage.Default.GetAsync("Token");
+                if (string.IsNullOrEmpty(token))
+                {
+                    await GoToLoginPage();
+                    return;
+                }
 
-            // Retrieve token from internal storage
-            var token = await SecureStorage.GetAsync("Token");
-            if (string.IsNullOrEmpty(token))
-            {
-                await GoToLoginPage();
-            }
-            else
-            {
                 var jsonToken = new JwtSecurityTokenHandler().ReadToken(token) as JwtSecurityToken;
 
                 if (jsonToken.ValidTo < DateTime.UtcNow)
                 {
-                    SecureStorage.Remove("Token");
+                    SecureStorage.Default.Remove("Token");
                     await GoToLoginPage();
+                    return;
                 }
-                else
-                {
-                    var role = jsonToken.Claims.FirstOrDefault(q => q.Type.Equals(ClaimTypes.Role))?.Value;
 
-                    App.UserInfo = new UserInfo()
-                    {
-                        Username = jsonToken.Claims.FirstOrDefault(q => q.Type.Equals(ClaimTypes.Email))?.Value,
-                        Role = role
-                    };
-                    MenuBuilder.BuildMenu();
-                    await GoToMainPage();
-                }
+                var role = jsonToken.Claims.FirstOrDefault(q => q.Type.Equals(ClaimTypes.Role))?.Value;
+
+                App.UserInfo = new UserInfo()
+                {
+                    Username = jsonToken.Claims.FirstOrDefault(q => q.Type.Equals(ClaimTypes.Email))?.Value,
+                    Role = role
+                };
+                MenuBuilder.BuildMenu();
+                await GoToMainPage();
+            }
+            catch (PlatformNotSupportedException)
+            {
+                await GoToLoginPage();
+            }
+            catch (Exception)
+            {
+                await GoToLoginPage();
             }
         }
 
         private async Task GoToLoginPage()
         {
-            await Shell.Current.GoToAsync($"{nameof(LoginPage)}");
+            Application.Current.MainPage = new AppShell();
+            await Shell.Current.GoToAsync("//LoginPage");
         }
 
         private async Task GoToMainPage()
         {
-            await Shell.Current.GoToAsync($"{nameof(MainPage)}");
+            Application.Current.MainPage = new AppShell();
+            await Shell.Current.GoToAsync("//MainPage");
         }
     }
 }

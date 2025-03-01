@@ -13,9 +13,20 @@ namespace CarListApp.Maui.ViewModels
         [RelayCommand]
         async void Logout()
         {
-            SecureStorage.Remove("Token");
-            App.UserInfo = null;
-            await Shell.Current.GoToAsync($"{nameof(LoginPage)}");
+            try
+            {
+                SecureStorage.Default.Remove("Token");
+                App.UserInfo = null;
+                Application.Current.MainPage = new AppShell();
+                await Shell.Current.GoToAsync("//LoginPage");
+            }
+            catch (Exception)
+            {
+                // Even if secure storage fails, we still want to log out
+                App.UserInfo = null;
+                Application.Current.MainPage = new AppShell();
+                await Shell.Current.GoToAsync("//LoginPage");
+            }
         }
     }
 }

@@ -4,11 +4,22 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:CarListApp.Maui"
-    Shell.FlyoutBehavior="Flyout">
+    Shell.FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False">
 
     <ShellContent
-        Title="Home"
+        Route="LoadingPage"
         ContentTemplate="{DataTemplate local:LoadingPage}"
-        Route="LoadingPage" />
+        Shell.NavBarIsVisible="False" />
+
+    <ShellContent
+        Route="LoginPage"
+        ContentTemplate="{DataTemplate local:LoginPage}"
+        Shell.NavBarIsVisible="False" />
+
+    <ShellContent
+        Route="MainPage"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Shell.NavBarIsVisible="False" />
 
 </Shell>

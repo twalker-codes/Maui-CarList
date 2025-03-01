@@ -28,5 +28,14 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSFaceIDUsageDescription</key>
+	<string>We need to use Face ID for secure authentication</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>We need to use Face ID for secure authentication</string>
 </dict>
 </plist>

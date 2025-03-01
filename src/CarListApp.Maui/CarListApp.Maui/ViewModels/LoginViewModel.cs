@@ -1,4 +1,3 @@
-
 using CarListApp.Maui.Helpers;
 using CarListApp.Maui.Models;
 using CarListApp.Maui.Services;
@@ -43,7 +42,22 @@ namespace CarListApp.Maui.ViewModels
                 if (!string.IsNullOrEmpty(response.Token))
                 {
                     // Store token in secure storage 
-                    await SecureStorage.SetAsync("Token", response.Token);
+                    try
+                    {
+                        await SecureStorage.Default.SetAsync("Token", response.Token);
+                    }
+                    catch (PlatformNotSupportedException)
+                    {
+                        // Handle platforms where secure storage is not supported
+                        await DisplayLoginMessage("Secure storage is not supported on this device");
+                        return;
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle or log the exception
+                        await DisplayLoginMessage($"Error storing token: {ex.Message}");
+                        return;
+                    }
 
                     // build a menu on the fly...based on the user role
                     var jsonToken = new JwtSecurityTokenHandler().ReadToken(response.Token) as JwtSecurityToken;
@@ -56,10 +70,10 @@ namespace CarListApp.Maui.ViewModels
                         Role = role
                     };
 
-
                     // navigate to app's main page
                     MenuBuilder.BuildMenu();
-                    await Shell.Current.GoToAsync($"{nameof(MainPage)}");
+                    Application.Current.MainPage = new AppShell();
+                    await Shell.Current.GoToAsync("//MainPage");
 
                 }
                 else

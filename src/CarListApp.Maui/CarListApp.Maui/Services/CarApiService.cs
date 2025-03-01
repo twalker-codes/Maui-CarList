@@ -1,4 +1,3 @@
-
 using CarListApp.Maui.Models;
 using Newtonsoft.Json;
 using System.Net.Http.Json;
@@ -8,7 +7,7 @@ namespace CarListApp.Maui.Services
     public class CarApiService
     {
         HttpClient _httpClient;
-        public static string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:8099" : "http://localhost:8099";
+        public static string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5001" : "http://localhost:5001";
         public string StatusMessage;
 
         public CarApiService()
@@ -109,8 +108,19 @@ namespace CarListApp.Maui.Services
 
         public async Task SetAuthToken()
         {
-            var token = await SecureStorage.GetAsync("Token");
-            _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            try
+            {
+                var token = await SecureStorage.Default.GetAsync("Token");
+                if (!string.IsNullOrEmpty(token))
+                {
+                    _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                }
+            }
+            catch (Exception)
+            {
+                // If we can't get the token, we'll just make unauthenticated requests
+                _httpClient.DefaultRequestHeaders.Authorization = null;
+            }
         }
     }
 }
