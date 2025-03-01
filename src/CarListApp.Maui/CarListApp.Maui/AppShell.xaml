@@ -3,23 +3,76 @@
     x:Class="CarListApp.Maui.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:CarListApp.Maui"
-    Shell.FlyoutBehavior="Disabled"
-    Shell.NavBarIsVisible="False">
+    xmlns:auth="clr-namespace:CarListApp.Maui.Features.Auth.Views"
+    xmlns:cars="clr-namespace:CarListApp.Maui.Features.Cars.Views"
+    xmlns:constants="clr-namespace:CarListApp.Maui.Core.Constants"
+    FlyoutBehavior="Disabled"
+    NavBarIsVisible="False">
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Shell">
+                <Setter Property="FlyoutBehavior" Value="Disabled"/>
+                <Setter Property="NavBarIsVisible" Value="False"/>
+            </Style>
+            <Style TargetType="TabBar">
+                <Setter Property="Shell.TabBarBackgroundColor" 
+                        Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}" />
+                <Setter Property="Shell.TabBarUnselectedColor" 
+                        Value="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}" />
+                <Setter Property="Shell.TabBarTitleColor" 
+                        Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryLight}}" />
+            </Style>
+            <Style TargetType="ShellContent">
+                <Setter Property="Shell.BackgroundColor" 
+                        Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}" />
+            </Style>
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <!-- Auth Section -->
+    <ShellContent
+        Route="loading"
+        ContentTemplate="{DataTemplate auth:LoadingPage}"
+        Shell.FlyoutBehavior="Disabled" />
 
     <ShellContent
-        Route="LoadingPage"
-        ContentTemplate="{DataTemplate local:LoadingPage}"
-        Shell.NavBarIsVisible="False" />
+        Route="login"
+        ContentTemplate="{DataTemplate auth:LoginPage}"
+        Shell.FlyoutBehavior="Disabled" />
 
     <ShellContent
-        Route="LoginPage"
-        ContentTemplate="{DataTemplate local:LoginPage}"
-        Shell.NavBarIsVisible="False" />
+        Route="logout"
+        ContentTemplate="{DataTemplate auth:LogoutPage}"
+        Shell.FlyoutBehavior="Disabled" />
 
-    <ShellContent
-        Route="MainPage"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Shell.NavBarIsVisible="False" />
+    <!-- Main Section -->
+    <TabBar Route="main">
+        <Tab Title="Cars" Route="cars">
+            <Tab.Icon>
+                <FontImageSource FontFamily="FontAwesomeSolid"
+                               Glyph="{x:Static constants:FontAwesomeIcons.Car}"
+                               Size="22"
+                               Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryLight}}"/>
+            </Tab.Icon>
+            <ShellContent
+                Title="Cars"
+                Route="list"
+                ContentTemplate="{DataTemplate cars:CarListPage}" />
+        </Tab>
+            
+        <Tab Title="Profile" Route="profile">
+            <Tab.Icon>
+                <FontImageSource FontFamily="FontAwesomeSolid"
+                               Glyph="{x:Static constants:FontAwesomeIcons.Profile}"
+                               Size="22"
+                               Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryLight}}"/>
+            </Tab.Icon>
+            <ShellContent
+                Title="Profile"
+                Route="details"
+                ContentTemplate="{DataTemplate auth:ProfilePage}" />
+        </Tab>
+    </TabBar>
 
 </Shell>

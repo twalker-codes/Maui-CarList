@@ -6,26 +6,41 @@
 
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
-    <Color x:Key="Primary">#512BD4</Color>
-    <Color x:Key="PrimaryDark">#ac99ea</Color>
-    <Color x:Key="PrimaryDarkText">#242424</Color>
+    <!-- Base Colors -->
+    <Color x:Key="Primary">#6B4EFF</Color>
+    <Color x:Key="PrimaryDark">#5740CC</Color>
+    <Color x:Key="PrimaryLight">#8F7AFF</Color>
+    <Color x:Key="PrimaryDarkText">#FFFFFF</Color>
+
+    <!-- Semantic Colors -->
+    <Color x:Key="Success">#28A745</Color>
+    <Color x:Key="Warning">#FFC107</Color>
+    <Color x:Key="Danger">#FF3B30</Color>
+    <Color x:Key="Info">#17A2B8</Color>
+
+    <!-- Common Colors -->
+    <Color x:Key="White">White</Color>
+    <Color x:Key="Black">Black</Color>
+    <Color x:Key="Transparent">Transparent</Color>
+
+    <!-- Gray Scale -->
+    <Color x:Key="Gray100">#F8F9FA</Color>
+    <Color x:Key="Gray200">#E9ECEF</Color>
+    <Color x:Key="Gray300">#DEE2E6</Color>
+    <Color x:Key="Gray400">#CED4DA</Color>
+    <Color x:Key="Gray500">#ADB5BD</Color>
+    <Color x:Key="Gray600">#6C757D</Color>
+    <Color x:Key="Gray700">#495057</Color>
+    <Color x:Key="Gray800">#343A40</Color>
+    <Color x:Key="Gray900">#212529</Color>
+
     <Color x:Key="Secondary">#DFD8F7</Color>
     <Color x:Key="SecondaryDarkText">#9880e5</Color>
     <Color x:Key="Tertiary">#2B0B98</Color>
-
-    <Color x:Key="White">White</Color>
-    <Color x:Key="Black">Black</Color>
     <Color x:Key="Magenta">#D600AA</Color>
     <Color x:Key="MidnightBlue">#190649</Color>
     <Color x:Key="OffBlack">#1f1f1f</Color>
 
-    <Color x:Key="Gray100">#E1E1E1</Color>
-    <Color x:Key="Gray200">#C8C8C8</Color>
-    <Color x:Key="Gray300">#ACACAC</Color>
-    <Color x:Key="Gray400">#919191</Color>
-    <Color x:Key="Gray500">#6E6E6E</Color>
-    <Color x:Key="Gray600">#404040</Color>
-    <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#141414</Color>
 
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarListApp.Maui.Features.Cars.Views.CarListPage"
+             xmlns:viewmodel="clr-namespace:CarListApp.Maui.Features.Cars.ViewModels"
+             xmlns:model="clr-namespace:CarListApp.Maui.Features.Cars.Models"
+             xmlns:constants="clr-namespace:CarListApp.Maui.Core.Constants"
+             x:DataType="viewmodel:CarListViewModel"
+             BackgroundColor="White"
+             Title="Cars">
+
+    <Grid RowDefinitions="*,Auto"
+          Padding="0"
+          RowSpacing="0"
+          BackgroundColor="White">
+
+        <!-- Car List -->
+        <RefreshView Grid.Row="0"
+                     Command="{Binding LoadCarsCommand}"
+                     IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView ItemsSource="{Binding Cars}"
+                          SelectionMode="None"
+                          Margin="0"
+                          VerticalOptions="Fill"
+                          HorizontalOptions="Fill">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Car">
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Delete"
+                                             BackgroundColor="#FF3B30"
+                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CarListViewModel}}, Path=DeleteCarCommand}"
+                                             CommandParameter="{Binding .}"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            
+                            <Frame Margin="20,5"
+                                   Padding="15"
+                                   BorderColor="#DDDDDD"
+                                   CornerRadius="10"
+                                   HasShadow="True"
+                                   BackgroundColor="White">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CarListViewModel}}, Path=EditCarCommand}"
+                                        CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+                                
+                                <Grid ColumnDefinitions="*,*,*" 
+                                      ColumnSpacing="10">
+                                    <Label Grid.Column="0"
+                                           Text="{Binding Make}"
+                                           TextColor="#1C375C"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center"/>
+                                    <Label Grid.Column="1"
+                                           Text="{Binding Model}"
+                                           TextColor="#666666"
+                                           VerticalOptions="Center"/>
+                                    <Label Grid.Column="2"
+                                           Text="{Binding Vin}"
+                                           TextColor="#666666"
+                                           VerticalOptions="Center"/>
+                                </Grid>
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <!-- Add New Car Button -->
+        <Button Grid.Row="1"
+                Text="Add New Car"
+                Command="{Binding AddNewCarCommand}"
+                BackgroundColor="#6B4EFF"
+                TextColor="White"
+                FontAttributes="Bold"
+                HeightRequest="50"
+                CornerRadius="25"
+                Margin="20,10,20,30">
+            <Button.ImageSource>
+                <FontImageSource FontFamily="FontAwesomeSolid"
+                               Glyph="{x:Static constants:FontAwesomeIcons.Plus}"
+                               Color="White"
+                               Size="16"/>
+            </Button.ImageSource>
+            <Button.Shadow>
+                <Shadow Brush="#6B4EFF"
+                        Offset="0,4"
+                        Radius="8"
+                        Opacity="0.2"/>
+            </Button.Shadow>
+        </Button>
+    </Grid>
+
+</ContentPage> 
