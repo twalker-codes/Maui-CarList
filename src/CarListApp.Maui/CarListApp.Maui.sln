@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarListApp.Maui", "CarListApp.Maui\CarListApp.Maui.csproj", "{1C8A4830-40B7-4783-8850-DB956CFC56CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarListApp.API", "CarListApp.API\CarListApp.API.csproj", "{EBB42768-09F9-45D0-82B3-179EEDF32C4A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C8A4830-40B7-4783-8850-DB956CFC56CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C8A4830-40B7-4783-8850-DB956CFC56CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C8A4830-40B7-4783-8850-DB956CFC56CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C8A4830-40B7-4783-8850-DB956CFC56CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBB42768-09F9-45D0-82B3-179EEDF32C4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBB42768-09F9-45D0-82B3-179EEDF32C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBB42768-09F9-45D0-82B3-179EEDF32C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBB42768-09F9-45D0-82B3-179EEDF32C4A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
