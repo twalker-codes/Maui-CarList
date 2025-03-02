@@ -1,8 +1,6 @@
-﻿using CarListApp.Maui.Features.Auth.Views;
-using CarListApp.Maui.Features.Cars.Views;
+﻿using CarListApp.Maui.Features.Cars.Views;
 using CarListApp.Maui.Features.Auth.Services;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Maui.Controls;
+using CarListApp.Maui.Features.Profile.Views;
 using Serilog;
 
 namespace CarListApp.Maui;

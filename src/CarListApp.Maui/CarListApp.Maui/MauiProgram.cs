@@ -1,12 +1,10 @@
-﻿using CarListApp.Maui.Features.Auth.Services;
-using CarListApp.Maui.Features.Auth.ViewModels;
+﻿using CarListApp.Maui.Features.Auth.ViewModels;
 using CarListApp.Maui.Features.Auth.Views;
 using CarListApp.Maui.Features.Cars.Services;
 using CarListApp.Maui.Features.Cars.ViewModels;
 using CarListApp.Maui.Features.Cars.Views;
 using CarListApp.Maui.Infrastructure;
 using Microsoft.Extensions.Logging;
-using Microsoft.Maui.LifecycleEvents;
 using Serilog;
 using Serilog.Events;
 using CommunityToolkit.Maui;
@@ -25,6 +23,7 @@ public static class MauiProgram
             .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
             .Enrich.FromLogContext()
             .WriteTo.Debug()
+            .WriteTo.Console()
             .WriteTo.File(Path.Combine(FileSystem.AppDataDirectory, "logs/carlist-.log"),
                 rollingInterval: RollingInterval.Day,
                 retainedFileCountLimit: 7)
@@ -40,7 +39,6 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("fa-regular-400.ttf", "FontAwesomeRegular");
                 fonts.AddFont("fa-solid-900.ttf", "FontAwesomeSolid");
-                fonts.AddFont("fa-brands-400.ttf", "FontAwesomeBrands");
             });
 
 #if DEBUG
@@ -73,6 +71,7 @@ public static class MauiProgram
         builder.Services.AddTransient<CarEditPage>();
 
         // Register Theme Service
+        builder.Services.AddSingleton<IPreferences>(Preferences.Default);
         builder.Services.AddSingleton<IThemeService, ThemeService>();
 
         return builder.Build();

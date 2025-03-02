@@ -2,13 +2,16 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CarListApp.Maui.Features.Auth.Views.LoadingPage"
+             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}"
              Shell.NavBarIsVisible="False">
     
     <VerticalStackLayout VerticalOptions="Center">
         <ActivityIndicator IsRunning="True" 
+                          Color="{StaticResource Primary}"
                           HorizontalOptions="Center"
                           VerticalOptions="Center"/>
         <Label Text="Loading..."
+               TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                HorizontalOptions="Center"/>
     </VerticalStackLayout>
     

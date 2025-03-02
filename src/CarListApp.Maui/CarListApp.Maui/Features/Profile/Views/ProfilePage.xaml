@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:CarListApp.Maui.Features.Profile.ViewModels"
+             xmlns:views="clr-namespace:CarListApp.Maui.Features.Profile.Views"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:constants="clr-namespace:CarListApp.Maui.Core.Constants"
+             xmlns:models="clr-namespace:CarListApp.Maui.Core.Theming.Models"
+             xmlns:services="clr-namespace:CarListApp.Maui.Core.Theming.Services"
+             x:Class="CarListApp.Maui.Features.Profile.Views.ProfilePage"
+             x:DataType="viewmodel:ProfileViewModel"
+             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}"
+             Title="Profile">
+
+    <Grid RowDefinitions="Auto,*,Auto"
+          BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}"
+          Padding="20">
+
+        <!-- Loading Overlay -->
+        <Grid IsVisible="{Binding IsBusy}"
+              InputTransparent="False"
+              BackgroundColor="{AppThemeBinding Light={StaticResource LoadingOverlayColor}, Dark={StaticResource LoadingOverlayColor}}"
+              Grid.RowSpan="3">
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Color="{StaticResource Primary}"/>
+        </Grid>
+
+        <!-- Header -->
+        <Label Text="Profile"
+               FontSize="32"
+               FontAttributes="Bold"
+               TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+
+        <!-- Content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="20">
+                
+                <!-- User Info Card -->
+                <Frame Padding="20"
+                       CornerRadius="10"
+                       HasShadow="True"
+                       BorderColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray800}}"
+                       BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
+                    <Grid RowDefinitions="Auto,Auto" 
+                          RowSpacing="20">
+                        
+                        <!-- Profile Icon -->
+                        <Frame HeightRequest="80" 
+                               WidthRequest="80"
+                               CornerRadius="40"
+                               Padding="0"
+                               HorizontalOptions="Center"
+                               BackgroundColor="{StaticResource Primary}">
+                            <Label Text="{x:Static constants:FontAwesomeIcons.User}"
+                                   FontFamily="FontAwesomeSolid"
+                                   TextColor="{StaticResource White}"
+                                   FontSize="40"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Frame>
+
+                        <!-- User Details -->
+                        <VerticalStackLayout Grid.Row="1" 
+                                           Spacing="8">
+                            <Label Text="{Binding UserInfo.Username}"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                                   HorizontalOptions="Center"/>
+                            <Label Text="{Binding UserInfo.Email}"
+                                   TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+
+                <!-- Theme Settings -->
+                <Frame Padding="20"
+                       CornerRadius="10"
+                       HasShadow="True"
+                       BorderColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray800}}"
+                       BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
+                    <VerticalStackLayout Spacing="16">
+                        <Label Text="App Theme"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+
+                        <Picker ItemsSource="{x:Static models:Theme.AvailableThemes}"
+                                ItemDisplayBinding="{Binding DisplayName}"
+                                SelectedItem="{Binding Theme, Source={x:Static services:ThemeSettingsService.Instance}}"
+                                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray800}}" />
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Footer -->
+        <Button Grid.Row="2"
+                Text="Logout"
+                Command="{Binding LogoutCommand}"
+                Style="{StaticResource PrimaryButton}"
+                HeightRequest="50"
+                CornerRadius="25"/>
+    </Grid>
+</ContentPage> 

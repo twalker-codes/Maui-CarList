@@ -4,22 +4,22 @@
              x:Class="CarListApp.Maui.Features.Auth.Views.LogoutPage"
              xmlns:viewmodel="clr-namespace:CarListApp.Maui.Features.Auth.ViewModels"
              x:DataType="viewmodel:LogoutViewModel"
-             BackgroundColor="White"
+             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}"
              Shell.NavBarIsVisible="False">
     
     <Grid RowSpacing="0" 
           ColumnSpacing="0" 
-          BackgroundColor="White">
+          BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}">
         
         <VerticalStackLayout VerticalOptions="Center"
                             HorizontalOptions="Center"
                             Spacing="20">
             <ActivityIndicator IsRunning="True" 
-                              Color="#6B4EFF"
+                              Color="{StaticResource Primary}"
                               HeightRequest="50"
                               WidthRequest="50"/>
             <Label Text="Logging out..."
-                   TextColor="#1C375C"
+                   TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                    FontSize="18"
                    HorizontalOptions="Center"/>
         </VerticalStackLayout>

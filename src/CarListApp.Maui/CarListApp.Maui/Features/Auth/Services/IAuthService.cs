@@ -1,5 +1,5 @@
 using CarListApp.Maui.Features.Auth.Models;
-using System.Threading.Tasks;
+using CarListApp.Maui.Features.Profile.Models;
 
 namespace CarListApp.Maui.Features.Auth.Services
 {

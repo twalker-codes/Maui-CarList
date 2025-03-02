@@ -1,5 +1,6 @@
 using CarListApp.Maui.Core.Navigation;
 using CarListApp.Maui.Core.Security;
+using CarListApp.Maui.Core.Theming.Services;
 using CarListApp.Maui.Features.Auth.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Serilog;
@@ -11,6 +12,7 @@ namespace CarListApp.Maui.Features.Auth.ViewModels
         private readonly IAuthService _authService;
         private readonly INavigationService _navigationService;
         private readonly ITokenService _tokenService;
+        private readonly ThemeSettingsService _themeService;
 
         public LoadingPageViewModel(
             IAuthService authService, 
@@ -20,6 +22,7 @@ namespace CarListApp.Maui.Features.Auth.ViewModels
             _authService = authService;
             _navigationService = navigationService;
             _tokenService = tokenService;
+            _themeService = ThemeSettingsService.Instance;
             
             // Delay the check to ensure Shell is initialized
             MainThread.BeginInvokeOnMainThread(async () => 
@@ -81,6 +84,17 @@ namespace CarListApp.Maui.Features.Auth.ViewModels
                     Log.Warning("Token disappeared after server check");
                     await _navigationService.NavigateToLoginAsync();
                     return;
+                }
+
+                // Load user's theme preferences
+                try
+                {
+                    Log.Debug("Loading user's theme preferences");
+                    _themeService.RefreshTheme();
+                }
+                catch (Exception ex)
+                {
+                    Log.Warning(ex, "Failed to load theme preferences - continuing with main navigation");
                 }
 
                 Log.Information("Authentication successful, proceeding to main page");

@@ -1,6 +1,6 @@
-using CarListApp.Maui.Features.Auth.ViewModels;
+using CarListApp.Maui.Features.Profile.ViewModels;
 
-namespace CarListApp.Maui.Features.Auth.Views;
+namespace CarListApp.Maui.Features.Profile.Views;
 
 public partial class ProfilePage : ContentPage
 {
@@ -10,17 +10,12 @@ public partial class ProfilePage : ContentPage
     {
         InitializeComponent();
         _viewModel = viewModel;
-        BindingContext = _viewModel;
+        BindingContext = viewModel;
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
         _viewModel.LoadUserInfoCommand.Execute(null);
-    }
-
-    private async void OnThemeToggled(object sender, ToggledEventArgs e)
-    {
-        await _viewModel.ToggleDarkModeCommand.ExecuteAsync(null);
     }
 } 

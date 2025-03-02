@@ -89,4 +89,33 @@
         <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Features\Profile\Services\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <MauiXaml Update="Features\Profile\Views\ProfilePage.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Features\Profile\Views\ProfilePage.xaml.cs">
+        <DependentUpon>ProfilePage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <MauiXaml Update="Resources\Themes\DarkTheme.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+      <MauiXaml Update="Resources\Themes\LightTheme.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+      <MauiXaml Update="Resources\Themes\Colors.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+    </ItemGroup>
+
 </Project>
