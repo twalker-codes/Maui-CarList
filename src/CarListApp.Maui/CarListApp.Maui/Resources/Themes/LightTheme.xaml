@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Theme Colors -->
+    <Color x:Key="PageBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="NavigationBarColor">#FFFFFF</Color>
+    <Color x:Key="PrimaryTextColor">#000000</Color>
+    <Color x:Key="SecondaryTextColor">#6C757D</Color>
+    <Color x:Key="TertiaryTextColor">#CED4DA</Color>
+    <Color x:Key="TransparentColor">Transparent</Color>
+    <Color x:Key="White">#FFFFFF</Color>
+    <Color x:Key="Black">#000000</Color>
+    <Color x:Key="OverlayColor">#20000000</Color>
+
+    <!-- UI Element Colors -->
+    <Color x:Key="CardBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="InputBackgroundColor">#F8F9FA</Color>
+    <Color x:Key="BorderColor">#E9ECEF</Color>
+    <Color x:Key="ButtonTextColor">#FFFFFF</Color>
+    <Color x:Key="ShadowColor">#40000000</Color>
+    <Color x:Key="DisabledButtonBackgroundColor">#E9ECEF</Color>
+    <Color x:Key="LoadingOverlayColor">#80000000</Color>
+
+    <!-- Status Colors -->
+    <Color x:Key="SuccessColor">#28A745</Color>
+    <Color x:Key="WarningColor">#FFC107</Color>
+    <Color x:Key="DangerColor">#FF3B30</Color>
+    <Color x:Key="InfoColor">#17A2B8</Color>
+
+    <!-- Styles -->
+    <Style TargetType="Page" ApplyToDerivedTypes="True">
+        <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}" />
+    </Style>
+
+    <Style TargetType="NavigationPage">
+        <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationBarColor}" />
+        <Setter Property="BarTextColor" Value="{StaticResource PrimaryTextColor}" />
+    </Style>
+
+    <Style TargetType="Entry">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource TertiaryTextColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource InputBackgroundColor}" />
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+    </Style>
+
+    <Style TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource ButtonTextColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+        <Setter Property="FontFamily" Value="OpenSansSemibold" />
+        <Setter Property="FontSize" Value="14.0" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Padding">
+            <Setter.Value>
+                <Thickness Left="14.0" Top="10.0" Right="14.0" Bottom="10.0" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{StaticResource SecondaryTextColor}" />
+                            <Setter Property="BackgroundColor" Value="{StaticResource DisabledButtonBackgroundColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="{StaticResource CardBackgroundColor}" />
+        <Setter Property="BorderColor" Value="{StaticResource BorderColor}" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="HasShadow" Value="True" />
+    </Style>
+
+</ResourceDictionary> 

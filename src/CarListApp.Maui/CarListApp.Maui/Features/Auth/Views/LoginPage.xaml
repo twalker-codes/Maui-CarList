@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarListApp.Maui.Features.Auth.Views.LoginPage"
+             xmlns:viewmodel="clr-namespace:CarListApp.Maui.Features.Auth.ViewModels"
+             x:DataType="viewmodel:LoginViewModel">
+
+    <ContentPage.Background>
+        <SolidColorBrush Color="White"/>
+    </ContentPage.Background>
+
+    <Grid VerticalOptions="Fill" 
+          HorizontalOptions="Fill">
+        
+        <ScrollView VerticalOptions="Fill" 
+                   HorizontalOptions="Fill"
+                   IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}">
+            <Grid VerticalOptions="Fill" 
+                  HorizontalOptions="Fill">
+                <VerticalStackLayout Spacing="20" 
+                                   Padding="20"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Fill">
+
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Welcome!" 
+                               FontSize="36" 
+                               TextColor="#1C375C"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"/>
+                        <Label Text="Login to your account" 
+                               FontSize="18" 
+                               TextColor="#666666"
+                               HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+
+                    <Frame Padding="20" 
+                           BorderColor="#DDDDDD" 
+                           CornerRadius="10"
+                           HasShadow="True"
+                           BackgroundColor="White"
+                           HorizontalOptions="Fill">
+                        <VerticalStackLayout Spacing="15">
+                            <Entry x:Name="Username" 
+                                   Text="{Binding Username}"
+                                   Placeholder="Enter Username"
+                                   PlaceholderColor="#999999"
+                                   TextColor="#1C375C"/>
+
+                            <Entry x:Name="Password" 
+                                   Text="{Binding Password}"
+                                   Placeholder="Enter Password"
+                                   IsPassword="True"
+                                   PlaceholderColor="#999999"
+                                   TextColor="#1C375C"/>
+
+                            <HorizontalStackLayout Spacing="10">
+                                <CheckBox IsChecked="{Binding RememberMe}"
+                                         Color="#6B4EFF"/>
+                                <Label Text="Remember Me"
+                                       TextColor="#666666"
+                                       VerticalOptions="Center"/>
+                            </HorizontalStackLayout>
+
+                            <Button Text="Sign In"
+                                    Command="{Binding LoginCommand}"
+                                    BackgroundColor="#6B4EFF"
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    CornerRadius="25"
+                                    HeightRequest="50"
+                                    Margin="0,10,0,0"
+                                    IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+
+        <!-- Loading Overlay -->
+        <Grid IsVisible="{Binding IsLoading}"
+              BackgroundColor="#80000000">
+            <VerticalStackLayout HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Spacing="10">
+                <ActivityIndicator IsRunning="{Binding IsLoading}"
+                                 Color="#6B4EFF"
+                                 HeightRequest="50"
+                                 WidthRequest="50"/>
+                <Label Text="Signing in..."
+                       TextColor="White"
+                       FontSize="16"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+
+</ContentPage> 
