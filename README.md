@@ -99,7 +99,6 @@ The application uses JWT-based authentication with two default users:
 
 The application supports:
 • Light/Dark mode switching
-• Custom primary color selection
 • Theme persistence per user
 • Dynamic theme updates
 
