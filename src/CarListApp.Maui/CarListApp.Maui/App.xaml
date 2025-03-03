@@ -10,74 +10,49 @@
                 <!-- Base Colors -->
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 
-                <!-- Theme Resources (Must be loaded before other styles that depend on them) -->
-                <ResourceDictionary Source="Resources/Themes/LightTheme.xaml" />
-                <ResourceDictionary Source="Resources/Themes/DarkTheme.xaml" />
-                
-                <!-- Base Theme (Shared Resources) -->
+                <!-- Theme Resources -->
                 <ResourceDictionary Source="Resources/Themes/BaseTheme.xaml" />
-                
-                <!-- Common Styles (These can now reference theme colors) -->
-                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
-                
-                <!-- View-Specific Styles -->
-                <ResourceDictionary Source="Resources/Styles/ViewStyles.xaml" />
+                <ResourceDictionary Source="Resources/Themes/DarkTheme.xaml" />
+                <ResourceDictionary Source="Resources/Themes/LightTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <!-- Global Theme-Aware Styles -->
+            <Style TargetType="Page">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}" />
+            </Style>
+
             <Style TargetType="Shell">
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}" />
                 <Setter Property="FlyoutBehavior" Value="Disabled" />
                 <Setter Property="NavBarIsVisible" Value="False" />
             </Style>
 
+            <Style TargetType="NavigationPage">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}" />
+            </Style>
+
             <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}" />
                 <Setter Property="NavigationPage.HasNavigationBar" Value="False" />
-                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}" />
             </Style>
 
-            <Style TargetType="Grid">
-                <Setter Property="VerticalOptions" Value="Fill" />
-                <Setter Property="HorizontalOptions" Value="Fill" />
+            <!-- Common Controls Theme-Aware Styles -->
+            <Style TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}" />
+                <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray800}}" />
             </Style>
 
-            <Style TargetType="ScrollView">
-                <Setter Property="VerticalOptions" Value="Fill" />
-                <Setter Property="HorizontalOptions" Value="Fill" />
-            </Style>
-
-            <!-- Colors -->
-            <Style x:Key="TabBarBackgroundColorStyle" TargetType="ContentPage">
-                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}" />
-            </Style>
-
-            <!-- Label Styles -->
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </Style>
 
-            <Style x:Key="SecondaryTextStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}" />
-            </Style>
-
-            <Style x:Key="TertiaryTextStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}" />
-            </Style>
-
-            <!-- Entry Styles -->
             <Style TargetType="Entry">
-                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray800}}" />
                 <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
-                <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}" />
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray800}}" />
+                <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
             </Style>
 
-            <!-- Frame Styles -->
-            <Style TargetType="Frame">
-                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}" />
-                <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray700}}" />
-            </Style>
-
-            <!-- Button Styles -->
+            <!-- Button Style -->
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="{StaticResource White}" />
                 <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
@@ -91,17 +66,29 @@
                 </Setter>
             </Style>
 
+            <!-- Additional Text Styles -->
+            <Style x:Key="SecondaryTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}" />
+            </Style>
+
+            <Style x:Key="TertiaryTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}" />
+            </Style>
+
+            <!-- Tab Bar Style -->
+            <Style x:Key="TabBarBackgroundColorStyle" TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}" />
+            </Style>
+
             <!-- Converters -->
             <converters:BoolToStringConverter x:Key="BoolToStringConverter" />
             <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converters:StringNotEmptyConverter x:Key="StringNotEmptyConverter" />
+            <converters:StringEmptyConverter x:Key="StringEmptyConverter" />
 
-            <!-- Window Configuration -->
-            <Style TargetType="Window">
-                <Setter Property="Width" Value="1200" />
-                <Setter Property="Height" Value="800" />
-                <Setter Property="MinimumWidth" Value="400" />
-                <Setter Property="MinimumHeight" Value="600" />
-            </Style>
+            <!-- View-Specific Styles -->
+            <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            <ResourceDictionary Source="Resources/Styles/ViewStyles.xaml" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

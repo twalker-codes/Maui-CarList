@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:auth="clr-namespace:CarListApp.Maui.Features.Auth.Views"
+    xmlns:profile="clr-namespace:CarListApp.Maui.Features.Profile.Views"
     xmlns:cars="clr-namespace:CarListApp.Maui.Features.Cars.Views"
     xmlns:constants="clr-namespace:CarListApp.Maui.Core.Constants"
     FlyoutBehavior="Disabled"
@@ -66,12 +67,12 @@
                 <FontImageSource FontFamily="FontAwesomeSolid"
                                Glyph="{x:Static constants:FontAwesomeIcons.Profile}"
                                Size="22"
-                               Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryLight}}"/>
+                               Color="{AppThemeBinding Light={StaticResource PrimaryLight}, Dark={StaticResource Primary}}"/>
             </Tab.Icon>
             <ShellContent
                 Title="Profile"
                 Route="details"
-                ContentTemplate="{DataTemplate auth:ProfilePage}" />
+                ContentTemplate="{DataTemplate profile:ProfilePage}" />
         </Tab>
     </TabBar>
 

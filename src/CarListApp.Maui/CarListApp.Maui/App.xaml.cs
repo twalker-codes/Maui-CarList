@@ -1,9 +1,7 @@
-﻿using CarListApp.Maui.Features.Auth.Models;
-using CarListApp.Maui.Features.Cars.Services;
-using Microsoft.Extensions.DependencyInjection;
-using CarListApp.Maui.Infrastructure;
-using Microsoft.Maui.Devices;
+﻿using CarListApp.Maui.Features.Cars.Services;
+using CarListApp.Maui.Features.Profile.Models;
 using Serilog;
+using CarListApp.Maui.Core.Theming.Services;
 
 namespace CarListApp.Maui;
 
@@ -26,6 +24,10 @@ public partial class App : Application
             CarDatabaseService = carDatabaseService;
             
             InitializeComponent();
+            
+            // Initialize theme from settings
+            UserAppTheme = ThemeSettingsService.Instance.Theme.AppTheme;
+            
             MainPage = new AppShell(_serviceProvider);
 
             // Handle initial navigation after shell is created
@@ -74,20 +76,7 @@ public partial class App : Application
     {
         try
         {
-            var window = base.CreateWindow(activationState);
-
-            // Set window size for desktop platforms
-            if (DeviceInfo.Current.Platform == DevicePlatform.MacCatalyst ||
-                DeviceInfo.Current.Platform == DevicePlatform.WinUI)
-            {
-                var displayInfo = DeviceDisplay.Current.MainDisplayInfo;
-                window.Width = 1200;
-                window.Height = 800;
-                window.X = (displayInfo.Width / displayInfo.Density - window.Width) / 2;
-                window.Y = (displayInfo.Height / displayInfo.Density - window.Height) / 2;
-            }
-
-            return window;
+            return base.CreateWindow(activationState);
         }
         catch (Exception ex)
         {

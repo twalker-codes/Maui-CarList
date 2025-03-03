@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
+             x:Class="CarListApp.Maui.Features.Cars.Views.CarListPage"
+             xmlns:viewmodel="clr-namespace:CarListApp.Maui.Features.Cars.ViewModels"
+             xmlns:model="clr-namespace:CarListApp.Maui.Features.Cars.Models"
+             xmlns:constants="clr-namespace:CarListApp.Maui.Core.Constants"
+             x:DataType="viewmodel:CarListViewModel"
+             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}"
+             Title="Cars">
+
+    <Grid ColumnDefinitions="*,*,*"
+            <!-- Search Box -->
+            <Frame Grid.Column="0"
+                   Padding="15,5"
+                   CornerRadius="25"
+                   BorderColor="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray700}}"
+                   BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray800}}">
+                <Grid ColumnDefinitions="Auto,*">
+                    <Label Text="{x:Static constants:FontAwesomeIcons.Search}"
+                           FontFamily="FontAwesomeSolid"
+                           TextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray600}}"
+                           VerticalOptions="Center"
+                           FontSize="16"/>
+                    <Entry Grid.Column="1"
+                           Text="{Binding SearchQuery}"
+                           Placeholder="Search cars..."
+                           PlaceholderColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray600}}"
+                           TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                           BackgroundColor="Transparent"/>
+                </Grid>
+            </Frame>
+
+            <!-- Sort Button -->
+            <Button Grid.Column="1"
+                    Text="{x:Static constants:FontAwesomeIcons.Sort}"
+                    FontFamily="FontAwesomeSolid"
+                    Command="{Binding ShowSortOptionsCommand}"
+                    Margin="10,0,0,0"
+                    HeightRequest="40"
+                    WidthRequest="40"
+                    CornerRadius="20"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray800}}"
+                    TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}"/>
+
+            <!-- Stats -->
+            <Label Grid.Row="1" 
+                   Grid.ColumnSpan="2"
+                   Margin="0,10,0,0"
+                   Text="{Binding FilteredCount, StringFormat='Showing {0} cars', Mode=OneWay}"
+                   TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}"
+                   FontSize="12"/>
+        </Grid>
+
+        <!-- Column Headers -->
+        <Grid Grid.Row="3" 
+              Margin="35,10,35,0"
+              ColumnDefinitions="*,*,*"
+              ColumnSpacing="10">
+            <Label Grid.Column="0"
+                   Text="MAKE"
+                   TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}"
+                   FontSize="12"
+                   FontAttributes="Bold"/>
+            <Label Grid.Column="1"
+                   Text="MODEL"
+                   TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}"
+                   FontSize="12"
+                   FontAttributes="Bold"/>
+            <Label Grid.Column="2"
+                   Text="VIN"
+                   TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}"
+                   FontSize="12"
+                   FontAttributes="Bold"/>
+        </Grid>
+
+        <!-- Car List -->
+        <RefreshView Grid.Row="4" 
+                     IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding RefreshCommand}">
+            <CollectionView ItemsSource="{Binding Cars}"
+                          SelectionMode="None"
+                          Margin="0"
+                          VerticalOptions="Fill"
+                          HorizontalOptions="Fill"
+                          RemainingItemsThreshold="5"
+                          RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}">
+                
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" 
+                                     ItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage> 

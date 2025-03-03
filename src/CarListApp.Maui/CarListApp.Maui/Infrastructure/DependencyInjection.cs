@@ -8,9 +8,10 @@ using CarListApp.Maui.Features.Auth.Views;
 using CarListApp.Maui.Features.Cars.Services;
 using CarListApp.Maui.Features.Cars.ViewModels;
 using CarListApp.Maui.Features.Cars.Views;
+using CarListApp.Maui.Features.Profile.ViewModels;
+using CarListApp.Maui.Features.Profile.Views;
 using CarListApp.Maui.Features.Shell.Services;
 using CarListApp.Maui.Features.Shell.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 
 namespace CarListApp.Maui.Infrastructure
@@ -62,6 +63,15 @@ namespace CarListApp.Maui.Infrastructure
                 Log.Error(ex, "Error configuring dependency injection");
                 throw;
             }
+        }
+
+        public static MauiAppBuilder ConfigureServices(this MauiAppBuilder builder)
+        {
+            // Existing registrations...
+            
+            builder.Services.AddSingleton<IThemeService, ThemeService>();
+            
+            return builder;
         }
     }
 } 

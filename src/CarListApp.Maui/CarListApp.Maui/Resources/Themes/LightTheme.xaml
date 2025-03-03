@@ -3,30 +3,36 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+    <!-- Base Colors -->
+    <Color x:Key="Primary">#6B4EFF</Color>
+    <Color x:Key="PrimaryTextColor">#1C1B1F</Color>
+    <Color x:Key="SecondaryTextColor">#49454F</Color>
+    <Color x:Key="TertiaryTextColor">#79747E</Color>
+    <Color x:Key="BackgroundColor">#FFFFFF</Color>
+    <Color x:Key="CardBackgroundColor">#F7F7F7</Color>
+    <Color x:Key="InputBackgroundColor">#F3F3F3</Color>
+    <Color x:Key="BorderColor">#E3E1EC</Color>
+    
+    <!-- Semantic Colors -->
+    <Color x:Key="Success">#4CAF50</Color>
+    <Color x:Key="Error">#B00020</Color>
+    <Color x:Key="Warning">#FB8C00</Color>
+
     <!-- Theme Colors -->
     <Color x:Key="PageBackgroundColor">#FFFFFF</Color>
     <Color x:Key="NavigationBarColor">#FFFFFF</Color>
-    <Color x:Key="PrimaryTextColor">#000000</Color>
-    <Color x:Key="SecondaryTextColor">#6C757D</Color>
-    <Color x:Key="TertiaryTextColor">#CED4DA</Color>
     <Color x:Key="TransparentColor">Transparent</Color>
     <Color x:Key="White">#FFFFFF</Color>
     <Color x:Key="Black">#000000</Color>
     <Color x:Key="OverlayColor">#20000000</Color>
 
     <!-- UI Element Colors -->
-    <Color x:Key="CardBackgroundColor">#FFFFFF</Color>
-    <Color x:Key="InputBackgroundColor">#F8F9FA</Color>
-    <Color x:Key="BorderColor">#E9ECEF</Color>
     <Color x:Key="ButtonTextColor">#FFFFFF</Color>
     <Color x:Key="ShadowColor">#40000000</Color>
     <Color x:Key="DisabledButtonBackgroundColor">#E9ECEF</Color>
     <Color x:Key="LoadingOverlayColor">#80000000</Color>
 
     <!-- Status Colors -->
-    <Color x:Key="SuccessColor">#28A745</Color>
-    <Color x:Key="WarningColor">#FFC107</Color>
-    <Color x:Key="DangerColor">#FF3B30</Color>
     <Color x:Key="InfoColor">#17A2B8</Color>
 
     <!-- Styles -->

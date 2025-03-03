@@ -5,6 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Json;
 using System.Security.Claims;
 using System.Text.Json;
+using CarListApp.Maui.Features.Profile.Models;
 using Serilog;
 
 namespace CarListApp.Maui.Features.Auth.Services
@@ -216,7 +217,7 @@ namespace CarListApp.Maui.Features.Auth.Services
                     throw new UnauthorizedAccessException("Invalid user information in token");
                 }
 
-                Log.Debug("Extracted user info from token: Username={Username}, Role={Role}", 
+                Log.Debug("Extracted user info from token: Username={Username}, Role: {Role}", 
                     _currentUser.Username, _currentUser.Role);
                 return _currentUser;
             }
@@ -265,6 +266,7 @@ namespace CarListApp.Maui.Features.Auth.Services
 
                 var userInfo = new UserInfo
                 {
+                    UserId = claims.FirstOrDefault(q => q.Type.Equals(JwtRegisteredClaimNames.Sub))?.Value ?? string.Empty,
                     Username = claims.FirstOrDefault(q => q.Type.Equals(ClaimTypes.Email))?.Value ?? string.Empty,
                     Role = claims.FirstOrDefault(q => q.Type.Equals(ClaimTypes.Role))?.Value ?? "User"
                 };

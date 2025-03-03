@@ -6,58 +6,57 @@
              xmlns:viewmodel="clr-namespace:CarListApp.Maui.Features.Cars.ViewModels"
              xmlns:constants="clr-namespace:CarListApp.Maui.Core.Constants"
              x:DataType="viewmodel:CarEditViewModel"
-             BackgroundColor="White"
+             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}"
              Title="{Binding IsNew, Converter={StaticResource BoolToStringConverter}, ConverterParameter='New Car|Edit Car'}">
 
     <Grid RowDefinitions="*, Auto" 
           RowSpacing="0"
-          BackgroundColor="White">
+          BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}">
         
         <!-- Main Content -->
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Spacing="25" 
                                Padding="20"
                                VerticalOptions="Center"
-                               HorizontalOptions="Fill"
-                               MaximumWidthRequest="600">
+                               HorizontalOptions="Fill">
                 
                 <!-- Make Input -->
                 <VerticalStackLayout Spacing="8">
                     <Label Text="Make"
-                           TextColor="#1C375C"
+                           TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                            FontAttributes="Bold"/>
                     <Entry Text="{Binding Make}"
-                           TextColor="#1C375C"
-                           BackgroundColor="Transparent"
+                           TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                           BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray800}}"
                            HeightRequest="45"
                            Placeholder="Enter make"
-                           PlaceholderColor="#999999"/>
+                           PlaceholderColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}"/>
                 </VerticalStackLayout>
 
                 <!-- Model Input -->
                 <VerticalStackLayout Spacing="8">
                     <Label Text="Model"
-                           TextColor="#1C375C"
+                           TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                            FontAttributes="Bold"/>
                     <Entry Text="{Binding Model}"
-                           TextColor="#1C375C"
-                           BackgroundColor="Transparent"
+                           TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                           BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray800}}"
                            HeightRequest="45"
                            Placeholder="Enter model"
-                           PlaceholderColor="#999999"/>
+                           PlaceholderColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}"/>
                 </VerticalStackLayout>
 
                 <!-- VIN Input -->
                 <VerticalStackLayout Spacing="8">
                     <Label Text="VIN"
-                           TextColor="#1C375C"
+                           TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                            FontAttributes="Bold"/>
                     <Entry Text="{Binding Vin}"
-                           TextColor="#1C375C"
-                           BackgroundColor="Transparent"
+                           TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                           BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray800}}"
                            HeightRequest="45"
                            Placeholder="Enter VIN"
-                           PlaceholderColor="#999999"/>
+                           PlaceholderColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}"/>
                 </VerticalStackLayout>
             </VerticalStackLayout>
         </ScrollView>
@@ -67,22 +66,20 @@
               ColumnDefinitions="*,*" 
               ColumnSpacing="15"
               Padding="20"
-              BackgroundColor="White">
+              BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}">
             
             <!-- Save Button -->
-            <Button 
-                Grid.Column="0"
-                Command="{Binding SaveCommand}"
-                Text="&#xf0c7;"
-                FontFamily="FontAwesomeSolid"
-                TextColor="White"
-                BackgroundColor="#6B4EFF"
-                CornerRadius="25"
-                HeightRequest="50"
-                WidthRequest="50"
-                HorizontalOptions="End">
+            <Button Grid.Column="0"
+                    Command="{Binding SaveCommand}"
+                    Text="&#xf0c7;"
+                    FontFamily="FontAwesomeSolid"
+                    Style="{StaticResource PrimaryButton}"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    WidthRequest="50"
+                    HorizontalOptions="End">
                 <Button.Shadow>
-                    <Shadow Brush="#6B4EFF"
+                    <Shadow Brush="{StaticResource Primary}"
                             Offset="0,2"
                             Radius="4"
                             Opacity="0.3"/>
@@ -90,19 +87,18 @@
             </Button>
 
             <!-- Cancel Button -->
-            <Button 
-                Grid.Column="1"
-                Command="{Binding CancelCommand}"
-                Text="&#xf00d;"
-                FontFamily="FontAwesomeSolid"
-                TextColor="White"
-                BackgroundColor="#FF3B30"
-                CornerRadius="25"
-                HeightRequest="50"
-                WidthRequest="50"
-                HorizontalOptions="Start">
+            <Button Grid.Column="1"
+                    Command="{Binding CancelCommand}"
+                    Text="&#xf00d;"
+                    FontFamily="FontAwesomeSolid"
+                    BackgroundColor="{StaticResource Danger}"
+                    TextColor="{StaticResource White}"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    WidthRequest="50"
+                    HorizontalOptions="Start">
                 <Button.Shadow>
-                    <Shadow Brush="#FF3B30"
+                    <Shadow Brush="{StaticResource Danger}"
                             Offset="0,2"
                             Radius="4"
                             Opacity="0.3"/>

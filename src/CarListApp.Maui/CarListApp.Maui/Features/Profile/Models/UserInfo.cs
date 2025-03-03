@@ -1,9 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace CarListApp.Maui.Features.Auth.Models
+namespace CarListApp.Maui.Features.Profile.Models
 {
     public class UserInfo
     {
+        [Required]
+        public string UserId { get; set; } = string.Empty;
+
         [Required]
         public string Username { get; set; } = string.Empty;
 

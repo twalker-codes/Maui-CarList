@@ -2,6 +2,7 @@ using CarListApp.Maui.Core.Navigation;
 using CarListApp.Maui.Features.Auth.Models;
 using CarListApp.Maui.Features.Auth.Services;
 using CarListApp.Maui.Core.Security;
+using CarListApp.Maui.Core.Theming.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Serilog;
@@ -14,6 +15,7 @@ namespace CarListApp.Maui.Features.Auth.ViewModels
         private readonly INavigationService _navigationService;
         private readonly ICredentialService _credentialService;
         private readonly ITokenService _tokenService;
+        private readonly ThemeSettingsService _themeService;
 
         public LoginViewModel(
             IAuthService authService, 
@@ -25,6 +27,8 @@ namespace CarListApp.Maui.Features.Auth.ViewModels
             _navigationService = navigationService;
             _credentialService = credentialService;
             _tokenService = tokenService;
+            _themeService = ThemeSettingsService.Instance;
+            
             Log.Information("LoginViewModel initialized with {AuthService}, {NavigationService}, {CredentialService}, {TokenService}",
                 authService.GetType().Name,
                 navigationService.GetType().Name,
@@ -194,6 +198,17 @@ namespace CarListApp.Maui.Features.Auth.ViewModels
                 catch (Exception ex)
                 {
                     Log.Warning(ex, "Failed to handle RememberMe setting - continuing with login");
+                }
+
+                // Load user's theme preferences
+                try
+                {
+                    Log.Debug("Loading user's theme preferences");
+                    _themeService.RefreshTheme();
+                }
+                catch (Exception ex)
+                {
+                    Log.Warning(ex, "Failed to load theme preferences - continuing with login");
                 }
 
                 loginSuccessful = true;
